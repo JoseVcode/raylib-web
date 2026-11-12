@@ -5,3 +5,10 @@ server:
 	python3 -m http.server 8000
 
 run: all server
+
+msg ?= Actualizacion
+push:
+	git add .
+	git commit -m "$(msg)"
+	git push
+#make push msg="commit de prueba"
