@@ -63,7 +63,7 @@ int main(void) {
         DrawText(TextFormat("TOTAL EN CAJA: $%d", totalGeneral), 20, 370, 20, DARKGREEN);
 
         if (modalAbierto) {
-            DrawRectangle(0, 0, 800, 600, Fade(BLACK, 0.5f));
+            DrawRectangle(0, 0, 800, 600, Fade(BLACK, 0.5f)); 
 
             Rectangle ventanaModal = { 250, 180, 300, 200 };
             if (GuiWindowBox(ventanaModal, TextFormat("Billete de $%d", billetes[billeteSeleccionado].valor))) {
