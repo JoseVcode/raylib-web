@@ -1,42 +1,8 @@
 #include "raylib.h"
-
-const int mascota[16][16] = {
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0},
-    {0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0},
-    {0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-    {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-    {0,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0},
-    {0,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0},
-    {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-    {0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0},
-    {0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0},
-    {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-    {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-    {0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-    {0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-};
-
-void DibujarSprite(const int sprite[16][16], int posX, int posY, int escala, Color color) {
-    for (int fila = 0; fila < 16; fila++) {
-        for (int col = 0; col < 16; col++) {
-            if (sprite[fila][col] == 1) {
-                DrawRectangle(
-                    posX + (col * escala), 
-                    posY + (fila * escala), 
-                    escala, 
-                    escala, 
-                    color
-                );
-            }
-        }
-    }
-}
+#include "dog.h"
 
 int main(void) {
-    InitWindow(360, 620, "x_X");
+    InitWindow(360, 620, "DogPet");
     SetTargetFPS(60);
 
     Color fondoLCD = { 155, 188, 15, 255 };
@@ -46,10 +12,13 @@ int main(void) {
     int posX = (360 - (16 * escala)) / 2;
     int posY = (360 + (16 * escala)) / 2;
 
+    Dog perro;
+    initDog(&perro, posX, posY, escala, pixelLCD);
+
     while (!WindowShouldClose()) {
         BeginDrawing();
             ClearBackground(fondoLCD);
-            DibujarSprite(mascota, posX, posY, escala, pixelLCD);
+            drawSprite(perro.sprite, perro.x, perro.y, perro.scale, perro.color);
         EndDrawing();
     }
 
