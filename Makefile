@@ -37,9 +37,7 @@ push:
 #make push msg="commit de prueba"
 
 deploy: all
-	git add -f web
-	git commit -m "Deploy web"
-	git subtree split --prefix web -b gh-pages
-	git push -f origin gh-pages:gh-pages
-	git branch -D gh-pages
-	git reset HEAD~1
+	rm -rf /tmp/gh-pages-deploy
+	git worktree add --detach /tmp/gh-pages-deploy
+	cd /tmp/gh-pages-deploy && git checkout --orphan gh-pages && git rm -rf . && cp -r $(CURDIR)/$(OUT_DIR)/* . && git add . && git commit -m "Deploy web" && git push -f origin gh-pages
+	git worktree remove --force /tmp/gh-pages-deploy
