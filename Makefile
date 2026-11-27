@@ -35,3 +35,11 @@ push:
 	git commit -m "$(msg)"
 	git push
 #make push msg="commit de prueba"
+
+deploy: all
+	git add -f web
+	git commit -m "Deploy web"
+	git subtree split --prefix web -b gh-pages
+	git push -f origin gh-pages:gh-pages
+	git branch -D gh-pages
+	git reset HEAD~1
